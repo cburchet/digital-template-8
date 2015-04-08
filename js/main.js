@@ -45,6 +45,6 @@ window.onload = function() {
     
     function update() 
     {
-        player.rotation = game.physics.arcade.moveToPointer(player, speed, game.input.activePointer);
+        game.physics.arcade.moveToPointer(player, speed, game.input.activePointer);
     }
 };
