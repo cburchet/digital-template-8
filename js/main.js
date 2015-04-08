@@ -47,8 +47,8 @@ window.onload = function() {
     function update() 
     {
         game.physics.arcade.moveToPointer(player, speed, game.input.activePointer);
-        greenOpponent.velocity.y = -90;
-        redOpponent.velocity.y = -90;
-        blueOpponent.velocity.y = -90;
+        greenOpponent.body.velocity.y = -90;
+        redOpponent.body.velocity.y = -90;
+        blueOpponent.body.velocity.y = -90;
     }
 };
