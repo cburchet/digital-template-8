@@ -83,6 +83,13 @@ window.onload = function() {
     
     function update() 
     {
+    	//player and opponents hit badCars
+    	game.physics.arcade.collide(player, cars);
+    	game.physics.arcade.collide(redOpponent, cars);
+    	game.physics.arcade.collide(greenOpponent, cars);
+    	game.physics.arcade.collide(blueOpponent, cars);
+    	
+    	//player and opponents collide
     	game.physics.arcade.collide(player, greenOpponent);
     	game.physics.arcade.collide(player, redOpponent);
     	game.physics.arcade.collide(player, blueOpponent);
@@ -92,6 +99,7 @@ window.onload = function() {
     	
     	game.physics.arcade.collide(redOpponent, blueOpponent);
     	
+    	//player and opponents overlap with offroad slows, road speeds up, finishline ends game
     	game.physics.arcade.overlap(player, offroad, slowed, null, this);
     	game.physics.arcade.overlap(player, road, speedup, null, this);
     	game.physics.arcade.overlap(player, finishLine, gameover, null, this);
