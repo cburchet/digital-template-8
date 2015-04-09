@@ -43,6 +43,7 @@ window.onload = function() {
         map.addTilesetImage('tiles', 'gameTiles');
         
         road = map.createLayer('roadLayer');
+        map.setCollisionBetween(1, 1000, true, 'roadLayer');
         road.resizeWorld();
         
         offroad = map.createLayer('offRoadLayer');
@@ -50,7 +51,7 @@ window.onload = function() {
         offroad.resizeWorld();
         
         finishLine = map.createLayer('finishLayer');
-        map.setCollisionBetween(1, 1000, true, 'offRoadLayer');
+        map.setCollisionBetween(1, 1000, true, 'finishLayer');
         finishLine.resizeWorld();
         
         player = game.add.sprite(400, game.world.height - 160, 'car');
