@@ -77,6 +77,7 @@ window.onload = function() {
     	game.physics.arcade.overlap(player, offroad, slowed, null, this);
     	game.physics.arcade.overlap(player, road, speedup, null, this);
     	game.physics.arcade.overlap(player, finishLine, gameover, null, this);
+    	
     	game.physics.arcade.overlap(greenOpponent, offroad, greenslow, null, this);
     	game.physics.arcade.overlap(greenOpponent, road, greenspeed, null, this);
     	game.physics.arcade.overlap(greenOpponent, finishLine, gameover, null, this);
@@ -95,47 +96,48 @@ window.onload = function() {
     	}
     }
     
-    void slowed()
+    function slowed()
     {
     	speed = 50;
     }
     
-    void speedup()
+    function speedup()
     {
     	speed = 100;
     }
     
-    void redslow()
+    function redslow()
     {
     	redOpponent.body.velocity.y = -50;
     }
     
-    void redspeed()
+    function redspeed()
     {
     	redOpponent.body.velocity.y = -100;
     }
     
-    void blueslow()
+    function blueslow()
     {
     	blueOpponent.body.velocity.y = -50;
     }
     
-    void bluespeed()
+    function bluespeed()
     {
     	blueOpponent.body.velocity.y = -100;
     }
     
-    void greenslow()
+    function greenslow()
     {
     	greenOpponent.body.velocity.y = -50;
     }
     
-    void greenspeed()
+    function greenspeed()
     {
     	greenOpponent.body.velocity.y = -100;
     }
     
-    void startPlay()
+    
+    function startPlay()
     {
     	introText.visible = false;
     	playing = true;
