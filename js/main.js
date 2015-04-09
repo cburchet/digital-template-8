@@ -34,6 +34,9 @@ window.onload = function() {
     var introText;
     var gameoverText;
     
+    var badCars;
+    var cars;
+    
     function create() 
     {
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -67,6 +70,10 @@ window.onload = function() {
     	blueOpponent = game.add.sprite(500, game.world.height - 160, 'bluecar');
     	game.physics.arcade.enable(blueOpponent);
     	
+    	cars = game.add.group();
+        cars.enableBody = true;
+    	game.time.events.loop(Phaser.Timer.SECOND * 2, createCar, this);
+    	
     	introText = game.add.text(game.world.centerX, 400, '- click to start racing -', { font: "40px Arial", fill: "#ffffff", align: "center" });
 
 	introText.fixedToCamera = true;
@@ -91,9 +98,62 @@ window.onload = function() {
     	if (playing == true)
     	{
     		game.physics.arcade.moveToPointer(player, speed, game.input.activePointer);
-		greenOpponent.body.velocity.y = -100;
-        	redOpponent.body.velocity.y = -100;
-        	blueOpponent.body.velocity.y = -100;
+    		
+    		if (greenOpponent.body.x > badCars.body.x - 75)
+    		{
+    			greenOpponent.body.velocity.x = -20;
+    		}
+    		else if (greenOpponent.body.x < badCars.body.x + 75)
+    		{
+    			greenOpponent.body.velocity.x = 20;
+    		}
+    		
+    		if (greenOpponent.body.velocity.x != 0)
+    		{
+    			greenOpponent.body.velocity.y = -45;
+    		}
+    		else
+    		{
+    			greenOpponent.body.velocity.y = -90;
+    		}
+    		if (redOpponent.body.velocity.x != 0)
+    		{
+    			redOpponent.body.velocity.y = -45;
+    		}
+    		else
+    		{
+    			redOpponent.body.velocity.y = -90;
+    		}
+    		if (blueOpponent.body.velocity.x != 0)
+    		{
+    			blueOpponent.body.velocity.y = -45;
+    		}
+    		else
+    		{
+    			blueOpponent.body.velocity.y = -90;
+    		}
+    	}
+    }
+    
+    function createCar()
+    {
+    	var i = 1;
+    	for (i; i > 0; i--)
+    	{
+    		var carColor = game.rnd.integerInRange(0,2);
+    		if (carColor = 0)
+    		{
+    			badCars = cars.create(game.rnd.integerInRange(138,862), game.rnd.integerInRange(75, 300) * -1, 'redcar');	
+    		}
+    		else if (carColor = 1)
+    		{
+    			badCars = cars.create(game.rnd.integerInRange(138,862), game.rnd.integerInRange(75, 300) * -1, 'bluecar');
+    		}
+    		else if (carColor = 2)
+    		{
+    			badCars = cars.create(game.rnd.integerInRange(138,862), game.rnd.integerInRange(75, 300) * -1, 'greencar');
+    		}
+    		badCars.body.gravity.y = 30;
     	}
     }
     
