@@ -147,7 +147,7 @@ window.onload = function() {
     function gameover()
     { 
     	playing = false;
-	player.body.velocity.x = 0;
+	player.body.velocity = 0;
 	greenOpponent.body.velocity = 0;
         redOpponent.body.velocity = 0;
         blueOpponent.body.velocity = 0;
