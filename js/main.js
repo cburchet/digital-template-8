@@ -85,7 +85,7 @@ window.onload = function() {
     {
     	//player and opponents hit badCars
     	game.physics.arcade.collide(player, cars, destroyCar, null, this);
-    	game.physics.arcade.collide(redOpponent, cars, reddestroyCar, null, this);
+    	game.physics.arcade.collide(redOpponent, cars, reddestroycar, null, this);
     	game.physics.arcade.collide(greenOpponent, cars, greendestroycar, null, this);
     	game.physics.arcade.collide(blueOpponent, cars, bluedestroycar, null, this);
     	
@@ -177,19 +177,19 @@ window.onload = function() {
     	speed = 35;
     }
     
-    function reddestroyCar(redOpponent, cars)
+    function reddestroycar(redOpponent, cars)
     {
     	cars.kill();
     	redOpponent.body.velocity.y = -50;
     }
     
-    function greendestroyCar(greenOpponent, cars)
+    function greendestroycar(greenOpponent, cars)
     {
     	cars.kill();
     	greenOpponent.body.velocity.y = -50;
     }
     
-    function bluedestroyCar(blueOpponent, cars)
+    function bluedestroycar(blueOpponent, cars)
     {
     	cars.kill();
     	blueOpponent.body.velocity.y = -50;
