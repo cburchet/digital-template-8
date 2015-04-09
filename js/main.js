@@ -11,6 +11,8 @@ window.onload = function() {
         game.load.image('bluecar', 'assets/bluebadcar.png');
         game.load.image('greencar', 'assets/greenbadcar.png');
         game.load.audio('carEngine', 'assets/carEngine.wav');
+        game.load.tilemap('road', 'assets/roadrace.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.image( 'gameTiles', 'assets/tiles.png' );
     }
     
     //maps for 
@@ -37,6 +39,19 @@ window.onload = function() {
         game.physics.startSystem(Phaser.Physics.ARCADE);
        // game.physics.arcade.checkCollision.up = false;
         
+        map = game.add.tilemap('road');
+        map.addTilesetImage('tiles', 'gameTiles');
+        
+        road = map.createLayer('roadLayer');
+        road.resizeWorld();
+        
+        offroad = map.createLayer('offRoadLayer');
+        map.setCollisionBetween(1, 1000, true, 'offRoadLayer');
+        offroad.resizeWorld();
+        
+        finishLine = map.createLayer('finishLayer');
+        map.setCollisionBetween(1, 1000, true, 'offRoadLayer');
+        finishLine.resizeWorld();
         
         player = game.add.sprite(400, game.world.height - 160, 'car');
         game.physics.arcade.enable(player);
@@ -59,6 +74,18 @@ window.onload = function() {
     
     function update() 
     {
+    	game.physics.arcade.overlap(player, offroad, slowed, null, this);
+    	game.physics.arcade.overlap(player, road, speedup, null, this);
+    	game.physics.arcade.overlap(player, finishLine, gameover, null, this);
+    	game.physics.arcade.overlap(greenOpponent, offroad, greenslow, null, this);
+    	game.physics.arcade.overlap(greenOpponent, road, greenspeed, null, this);
+    	game.physics.arcade.overlap(greenOpponent, finishLine, gameover, null, this);
+    	game.physics.arcade.overlap(redOpponent, offroad, redslow, null, this);
+    	game.physics.arcade.overlap(redOpponent, road, redspeed, null, this);
+    	game.physics.arcade.overlap(redOpponent, finishLine, gameover, null, this);
+    	game.physics.arcade.overlap(blueOpponent, offroad, blueslow, null, this);
+    	game.physics.arcade.overlap(blueOpponent, road, bluespeed, null, this);
+    	game.physics.arcade.overlap(blueOpponent, finishLine, gameover, null, this);
     	if (playing == true)
     	{
     		game.physics.arcade.moveToPointer(player, speed, game.input.activePointer);
@@ -66,6 +93,46 @@ window.onload = function() {
         	redOpponent.body.velocity.y = -100;
         	blueOpponent.body.velocity.y = -100;
     	}
+    }
+    
+    void slowed()
+    {
+    	speed = 50;
+    }
+    
+    void speedup()
+    {
+    	speed = 100;
+    }
+    
+    void redslow()
+    {
+    	redOpponent.body.velocity.y = -50;
+    }
+    
+    void redspeed()
+    {
+    	redOpponent.body.velocity.y = -100;
+    }
+    
+    void blueslow()
+    {
+    	blueOpponent.body.velocity.y = -50;
+    }
+    
+    void bluespeed()
+    {
+    	blueOpponent.body.velocity.y = -100;
+    }
+    
+    void greenslow()
+    {
+    	greenOpponent.body.velocity.y = -50;
+    }
+    
+    void greenspeed()
+    {
+    	greenOpponent.body.velocity.y = -100;
     }
     
     void startPlay()
