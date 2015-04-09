@@ -72,6 +72,7 @@ window.onload = function() {
     	
     	cars = game.add.group();
         cars.enableBody = true;
+        createCar();
     	game.time.events.loop(Phaser.Timer.SECOND * 2, createCar, this);
     	
     	introText = game.add.text(game.world.centerX, 400, '- click to start racing -', { font: "40px Arial", fill: "#ffffff", align: "center" });
