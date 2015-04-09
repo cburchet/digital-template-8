@@ -25,7 +25,7 @@ window.onload = function() {
     var playerEngine;
     
     var playing = false;
-    var speed = 100;
+    var speed = 70;
     
     var greenOpponent;
     var redOpponent;
@@ -83,6 +83,15 @@ window.onload = function() {
     
     function update() 
     {
+    	game.physics.arcade.collide(player, greenOpponent);
+    	game.physics.arcade.collide(player, redOpponent);
+    	game.physics.arcade.collide(player, blueOpponent);
+    	
+    	game.physics.arcade.collide(greenOpponent, redOpponent);
+    	game.physics.arcade.collide(greenOpponent, blueOpponent);
+    	
+    	game.physics.arcade.collide(redOpponent, blueOpponent);
+    	
     	game.physics.arcade.overlap(player, offroad, slowed, null, this);
     	game.physics.arcade.overlap(player, road, speedup, null, this);
     	game.physics.arcade.overlap(player, finishLine, gameover, null, this);
@@ -107,6 +116,24 @@ window.onload = function() {
     		else if (greenOpponent.body.x < badCars.body.x + 75)
     		{
     			greenOpponent.body.velocity.x = 20;
+    		}
+    		
+    		if (redOpponent.body.x > badCars.body.x - 75)
+    		{
+    			redOpponent.body.velocity.x = -20;
+    		}
+    		else if (redOpponent.body.x < badCars.body.x + 75)
+    		{
+    			redOpponent.body.velocity.x = 20;
+    		}
+    		
+    		if (blueOpponent.body.x > badCars.body.x - 75)
+    		{
+    			blueOpponent.body.velocity.x = -20;
+    		}
+    		else if (blueOpponent.body.x < badCars.body.x + 75)
+    		{
+    			blueOpponent.body.velocity.x = 20;
     		}
     		
     		if (greenOpponent.body.velocity.x != 0)
@@ -154,18 +181,18 @@ window.onload = function() {
     		{
     			badCars = cars.create(game.rnd.integerInRange(138,862), game.rnd.integerInRange(75, 300) * -1, 'greencar');
     		}
-    		badCars.body.gravity.y = 30;
+    		badCars.body.gravity.y = 70;
     	}
     }
     
     function slowed()
     {
-    	speed = 50;
+    	speed = 35;
     }
     
     function speedup()
     {
-    	speed = 100;
+    	speed = 70;
     }
     
     function redslow()
