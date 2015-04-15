@@ -27,6 +27,7 @@ window.onload = function() {
     var playing = false;
     var speed = 70;
     
+    var enemies;
     var greenOpponent;
     var redOpponent;
     var blueOpponent;
@@ -63,12 +64,12 @@ window.onload = function() {
         playerEngine = game.add.audio('carEngine');
     	playerEngine.play('', 0, .1, true);
     	
-    	greenOpponent = game.add.sprite(200, game.world.height - 160, 'greencar');
-    	game.physics.arcade.enable(greenOpponent);
-    	redOpponent = game.add.sprite(300, game.world.height - 160, 'redcar');
-    	game.physics.arcade.enable(redOpponent);
-    	blueOpponent = game.add.sprite(500, game.world.height - 160, 'bluecar');
-    	game.physics.arcade.enable(blueOpponent);
+    	
+    	enemies = game.add.group();
+    	enemies.enableBody();
+    	greenOpponent = enemies.create(200, game.world.height - 160, 'greencar');
+    	redOpponent = enemies.create(300, game.world.height - 160, 'redcar');
+    	blueOpponent = enemies(500, game.world.height - 160, 'bluecar');
     	
     	cars = game.add.group();
         cars.enableBody = true;
@@ -85,89 +86,24 @@ window.onload = function() {
     {
     	//player and opponents hit badCars
     	game.physics.arcade.collide(player, cars, destroyCar, null, this);
-    	game.physics.arcade.collide(redOpponent, cars, reddestroycar, null, this);
-    	game.physics.arcade.collide(greenOpponent, cars, greendestroycar, null, this);
-    	game.physics.arcade.collide(blueOpponent, cars, bluedestroycar, null, this);
+    	game.physics.arcade.collide(enemies, cars, enemydestroycar, null, this););
     	
     	//player and opponents collide
-    	game.physics.arcade.collide(player, greenOpponent);
-    	game.physics.arcade.collide(player, redOpponent);
-    	game.physics.arcade.collide(player, blueOpponent);
-    	
-    	game.physics.arcade.collide(greenOpponent, redOpponent);
-    	game.physics.arcade.collide(greenOpponent, blueOpponent);
-    	
-    	game.physics.arcade.collide(redOpponent, blueOpponent);
+    	game.physics.arcade.collide(player, enemies);
+    	game.physics.arcade.collide(enemies, enemies);
     	
     	//player and opponents overlap with offroad slows, road speeds up, finishline ends game
     	game.physics.arcade.overlap(player, offroad, slowed, null, this);
     	game.physics.arcade.overlap(player, road, speedup, null, this);
     	game.physics.arcade.overlap(player, finishLine, gameover, null, this);
     	
-    	game.physics.arcade.overlap(greenOpponent, offroad, greenslow, null, this);
-    	game.physics.arcade.overlap(greenOpponent, road, greenspeed, null, this);
-    	game.physics.arcade.overlap(greenOpponent, finishLine, gameover, null, this);
-    	game.physics.arcade.overlap(redOpponent, offroad, redslow, null, this);
-    	game.physics.arcade.overlap(redOpponent, road, redspeed, null, this);
-    	game.physics.arcade.overlap(redOpponent, finishLine, gameover, null, this);
-    	game.physics.arcade.overlap(blueOpponent, offroad, blueslow, null, this);
-    	game.physics.arcade.overlap(blueOpponent, road, bluespeed, null, this);
-    	game.physics.arcade.overlap(blueOpponent, finishLine, gameover, null, this);
+    	game.physics.arcade.overlap(enemies, offroad, enemyslow, null, this);
+    	game.physics.arcade.overlap(enemies, road, enemyspeed, null, this);
+    	game.physics.arcade.overlap(enemies, finishLine, gameover, null, this);
     	if (playing == true)
     	{
     		game.physics.arcade.moveToPointer(player, speed, game.input.activePointer);
-    		
-    		if (greenOpponent.body.x > badCars.body.x - 75)
-    		{
-    			greenOpponent.body.velocity.x = -20;
-    		}
-    		else if (greenOpponent.body.x < badCars.body.x + 75)
-    		{
-    			greenOpponent.body.velocity.x = 20;
-    		}
-    		
-    		if (redOpponent.body.x > badCars.body.x - 75)
-    		{
-    			redOpponent.body.velocity.x = -20;
-    		}
-    		else if (redOpponent.body.x < badCars.body.x + 75)
-    		{
-    			redOpponent.body.velocity.x = 20;
-    		}
-    		
-    		if (blueOpponent.body.x > badCars.body.x - 75)
-    		{
-    			blueOpponent.body.velocity.x = -20;
-    		}
-    		else if (blueOpponent.body.x < badCars.body.x + 75)
-    		{
-    			blueOpponent.body.velocity.x = 20;
-    		}
-    		
-    		if (greenOpponent.body.velocity.x != 0)
-    		{
-    			greenOpponent.body.velocity.y = -45;
-    		}
-    		else
-    		{
-    			greenOpponent.body.velocity.y = -90;
-    		}
-    		if (redOpponent.body.velocity.x != 0)
-    		{
-    			redOpponent.body.velocity.y = -45;
-    		}
-    		else
-    		{
-    			redOpponent.body.velocity.y = -90;
-    		}
-    		if (blueOpponent.body.velocity.x != 0)
-    		{
-    			blueOpponent.body.velocity.y = -45;
-    		}
-    		else
-    		{
-    			blueOpponent.body.velocity.y = -90;
-    		}
+    	
     	}
     }
     
@@ -177,23 +113,12 @@ window.onload = function() {
     	speed = 35;
     }
     
-    function reddestroycar(redOpponent, cars)
+    function enemydestroycar(enemies, cars)
     {
     	cars.kill();
-    	redOpponent.body.velocity.y = -50;
+    	enemies.body.velocity.y = -50;
     }
-    
-    function greendestroycar(greenOpponent, cars)
-    {
-    	cars.kill();
-    	greenOpponent.body.velocity.y = -50;
-    }
-    
-    function bluedestroycar(blueOpponent, cars)
-    {
-    	cars.kill();
-    	blueOpponent.body.velocity.y = -50;
-    }
+
     
     function createCar()
     {
@@ -227,35 +152,38 @@ window.onload = function() {
     	speed = 70;
     }
     
-    function redslow()
+    function enemyslow(enemies)
     {
-    	redOpponent.body.velocity.y = -50;
+    	enemies.body.velocity.y -= 10;
+    	enemies.body.velocity.x -= 5;
+    	if (enemies.body.velocity.y < 50)
+    	{
+    		enemies.body.velocity.y = 50;
+    	}
+    	if (enemies.body.velocity.x < 0)
+    	{
+    		enemies.body.velocity.x = 0	
+    	}
     }
     
-    function redspeed()
+    function enemySideways(enemies)
     {
-    	redOpponent.body.velocity.y = -100;
+    	//input sideways movement 
     }
     
-    function blueslow()
+    function enemyspeed(enemies)
     {
-    	blueOpponent.body.velocity.y = -50;
+    	enemies.body.velocity.y += 10;
+    	if (enemies.body.velocity.y > speed)
+    	{
+    		enemies.body.velocity.y = speed;
+    	}
+    	if (enemies.body.velocity.x > 50)
+    	{
+    		enemies.body.velocity.x = 50	
+    	}
     }
-    
-    function bluespeed()
-    {
-    	blueOpponent.body.velocity.y = -100;
-    }
-    
-    function greenslow()
-    {
-    	greenOpponent.body.velocity.y = -50;
-    }
-    
-    function greenspeed()
-    {
-    	greenOpponent.body.velocity.y = -100;
-    }
+
     
     
     function startPlay()
@@ -268,9 +196,7 @@ window.onload = function() {
     { 
     	playing = false;
 	player.body.velocity = 0;
-	greenOpponent.body.velocity = 0;
-        redOpponent.body.velocity = 0;
-        blueOpponent.body.velocity = 0;
+	enemies.body.velocity = 0;
 	var gameoverText = game.add.text(350, 300, 'Game Over', { fontSize: '128px', fill: 'red' });
 	gameoverText.fixedToCamera = true;
     }
