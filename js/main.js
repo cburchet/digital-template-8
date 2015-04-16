@@ -182,6 +182,7 @@ window.onload = function() {
     
     function boost()
     {
+    	lightning.kill();
     	speed = speed + 25;
     	player.body.velocity.y -= 25;
     	timecheck = game.time.now;
