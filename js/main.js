@@ -27,7 +27,7 @@ window.onload = function() {
     var cursors;
     
     var playing = false;
-    var speed = 75;
+    var speed = 120;
     
     var enemies;
     var greenOpponent;
@@ -100,7 +100,7 @@ window.onload = function() {
     	
     	
     	//player and opponents overlap with offroad slows, road speeds up, finishline ends game
-    	game.physics.arcade.overlap(player, finishLine, gameover, null, this);
+    	game.physics.arcade.overlap(player, finishLine, restart, null, this);
     	
     	game.physics.arcade.overlap(enemies, finishLine, gameover, null, this);
     	
