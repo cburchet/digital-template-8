@@ -145,10 +145,10 @@ window.onload = function() {
     		{
     			player.body.velocity.y += 10;
     		}
-    		if (Phaser.Keyboard.SPACEBAR.isDown)
-    		{
-    			fire();
-    		}
+    		if (game.input.activePointer.isDown)
+		{
+			fire();
+		}
     		if (player.body.velocity.x == speed)
     		{
     			player.body.velocity.x = speed;	
