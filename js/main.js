@@ -213,7 +213,7 @@ window.onload = function() {
 			    	bullet = game.add.sprite(redOpponent.x, redOpponent.y - 20, 'bullet');
 			    	bullet.lifespan = 1000;
 			    	game.physics.enable(bullet);
-			    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
+			    	//bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
 	    		}
 	    		else if (colorFire == 1)
 	    		{
@@ -221,7 +221,7 @@ window.onload = function() {
 			    	bullet = game.add.sprite(greenOpponent.x, greenOpponent.y - 20, 'bullet');
 			    	bullet.lifespan = 1000;
 			    	game.physics.enable(bullet);
-			    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
+			    	//bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
 	    		}
 	    		else if (colorFire == 2)
 	    		{
@@ -229,7 +229,7 @@ window.onload = function() {
 			    	bullet = game.add.sprite(blueOpponent.x, blueOpponent.y - 20, 'bullet');
 			    	bullet.lifespan = 1000;
 			    	game.physics.enable(bullet);
-			    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
+			    //	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
 	    		}
     		}
     	}
