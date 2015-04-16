@@ -123,7 +123,7 @@ window.onload = function() {
     		{
     			enemies.velocity.x = 0;
     		}
-    		enemyspeed(enemies);
+    		//enemyspeed(enemies);
     		if (cursors.left.isDown)
     		{
 			player.body.velocity.x -= 10;
