@@ -190,7 +190,9 @@ window.onload = function() {
     {
     	introText.visible = false;
     	playing = true;
-    	enemies.body.velocity.y = 10;
+    	greenOpponent.body.velocity.y = speed;
+    	redOpponent.body.velocity.y = speed;
+    	blueOpponent.body.velocity.y = speed;
     }
     
     function gameover()
