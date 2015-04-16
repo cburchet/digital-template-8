@@ -66,7 +66,7 @@ window.onload = function() {
     	
     	
     	enemies = game.add.group();
-    	enemies.enableBody();
+    	enemies.enableBody = true
     	greenOpponent = enemies.create(200, game.world.height - 160, 'greencar');
     	redOpponent = enemies.create(300, game.world.height - 160, 'redcar');
     	blueOpponent = enemies.create(500, game.world.height - 160, 'bluecar');
