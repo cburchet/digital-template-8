@@ -127,14 +127,20 @@ window.onload = function() {
     	
     	if (playing == true)
     	{
-    		enemies.body.velocity.y -= 5;
-    		if (enemies.body.velocity.y <= speed)
+    		redOpponent.body.velocity.y -= 5;
+    		blueOpponent.body.velocity.y -= 5;
+    		greenOpponent.body.velocity.y -= 5;
+    		if (redOpponent.body.velocity.y <= speed)
     		{
-    			enemies.body.velocity.y = speed;	
+    			redOpponent.body.velocity.y = speed;	
     		}
-    		if (enemies.x > 350 && enemies.x < 400)
+    		if (blueOpponent.body.velocity.y <= speed)
     		{
-    			enemies.velocity.x = 0;
+    			blueOpponent.body.velocity.y = speed;	
+    		}
+    		if (greenOpponent.body.velocity.y <= speed)
+    		{
+    			greenOpponent.body.velocity.y = speed;	
     		}
     		//enemyspeed(enemies);
     		if (cursors.left.isDown)
