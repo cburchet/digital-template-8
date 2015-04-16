@@ -106,7 +106,7 @@ window.onload = function() {
     	game.physics.arcade.collide(player, bullet, bulletHitPlayer, null, this);
     	game.physics.arcade.collide(redOpponent, bullet, bulletHitRed, null, this);
     	game.physics.arcade.collide(blueOpponent, bullet, bulletHitBlue, null, this);
-    	game.physics.arcade.collide(greenOpponent, bullet, bulletHitGren, null, this);
+    	game.physics.arcade.collide(greenOpponent, bullet, bulletHitGreen, null, this);
     	game.physics.arcade.collide(cars, bullet, bulletHitCar, null, this);
     	
     	//player and opponents overlap with offroad slows, road speeds up, finishline ends game
