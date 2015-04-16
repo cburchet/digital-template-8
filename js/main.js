@@ -192,7 +192,7 @@ window.onload = function() {
     
     function unboost()
     {
-    	speed = 75;
+    	speed = 120;
     	spedup = false;
     }
 
