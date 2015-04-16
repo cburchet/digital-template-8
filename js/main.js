@@ -13,6 +13,7 @@ window.onload = function() {
         game.load.audio('carEngine', 'assets/carEngine.wav');
         game.load.tilemap('road', 'assets/roadrace.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image( 'gameTiles', 'assets/tiles.png' );
+        game.load.image('lightning', 'assets/lightning.png');
     }
     
     //maps for 
@@ -23,6 +24,7 @@ window.onload = function() {
     
     var player;
     var playerEngine;
+    var cursors;
     
     var playing = false;
     var speed = 70;
@@ -37,6 +39,10 @@ window.onload = function() {
     
     var badCars;
     var cars;
+    
+    var timecheck;
+    var spedup = false;
+    var lightning;
     
     function create() 
     {
@@ -64,6 +70,7 @@ window.onload = function() {
         playerEngine = game.add.audio('carEngine');
     	playerEngine.play('', 0, .1, true);
     	
+    	cursors = game.input.keyboard.createCursorKeys();
     	
     	enemies = game.add.group();
     	enemies.enableBody = true
@@ -74,7 +81,10 @@ window.onload = function() {
     	cars = game.add.group();
         cars.enableBody = true;
         createCar();
+        lightning = game.add.sprite(400, game.world.height - 160, 'lightning');
+        game.physics.arcade.enable(lightning);
     	game.time.events.loop(Phaser.Timer.SECOND * 2, createCar, this);
+    	game.time.events.loop(Phaser.Timer.SECOND * 3, createLightning, this);
     	
     	introText = game.add.text(game.world.centerX, 400, '- click to start racing -', { font: "40px Arial", fill: "#ffffff", align: "center" });
 
@@ -100,10 +110,54 @@ window.onload = function() {
     	game.physics.arcade.overlap(enemies, offroad, enemyslow, null, this);
     	game.physics.arcade.overlap(enemies, road, enemyspeed, null, this);
     	game.physics.arcade.overlap(enemies, finishLine, gameover, null, this);
+    	
+    	//powerups
+    	game.physics.arcade.collide(player, lightning, boost, null, this);
+    	
+    	if (lightning.y > player.y + 200)
+    	{
+    		lightning.kill();
+    	}
+    	
+    	if (game.time.now > timecheck + 3000 && spedup)
+    	{
+    		unboost();
+    	}
+    	
     	if (playing == true)
     	{
-    		game.physics.arcade.moveToPointer(player, speed, game.input.activePointer);
-    	
+    		if (cursors.left.isDown)
+    		{
+			player.body.velocity.x -= 10;
+    		}
+    		else if (currsors.right.isDown)
+    		{
+    			player.body.velocity.x += 10;
+    		}
+    		if (cursors.up.isDown)
+    		{
+    			player.body.velocity.y -= 10;
+    		}
+    		else if (cursors.down.isDown)
+    		{
+    			player.body.velocity.y += 10;
+    		}
+    		if (player.body.velocity.x == speed)
+    		{
+    			player.body.velocity.x = speed;	
+    		}
+    		else if (player.body.velocity.x <= speed * -1)
+    		{
+    			player.body.velocity.x = speed * -1;	
+    		}
+    		if (player.body.velocity.y == speed)
+    		{
+    			player.body.velocity.y = speed;	
+    		}
+    		else if (player.body.velocity.y == speed * -1)
+    		{
+    			player.body.velocity.y = speed * -1;	
+    		}
     	}
     }
     
@@ -117,6 +171,30 @@ window.onload = function() {
     {
     	cars.kill();
     	enemies.body.velocity.y = -50;
+    }
+    
+    function createLightning()
+    {
+    	if (lightning.alive == false)
+    	{
+    		lightning.x = player.x - 10;
+    		lightning.y = player.y - 100;
+    		lightning.revive();
+    	}
+    }
+    
+    function boost()
+    {
+    	speed = speed + 30;
+    	player.body.velocity.y -= 30;
+    	timecheck = game.time.now;
+    	spedup = true;
+    }
+    
+    function unboost()
+    {
+    	speed -= 30;
+    	spedup = false;
     }
 
     
@@ -155,14 +233,9 @@ window.onload = function() {
     function enemyslow(enemies)
     {
     	enemies.body.velocity.y += 10;
-    	enemies.body.velocity.x -= 5;
-    	if (enemies.body.velocity.y > -50)
+    	if (enemies.body.velocity.y >= 50)
     	{
-    		enemies.body.velocity.y = -50;
-    	}
-    	if (enemies.body.velocity.x < 0)
-    	{
-    		enemies.body.velocity.x = 0	
+    		enemies.body.velocity.y = 50;
     	}
     }
     
@@ -174,13 +247,9 @@ window.onload = function() {
     function enemyspeed(enemies)
     {
     	enemies.body.velocity.y -= 10;
-    	if (enemies.body.velocity.y < speed * -1)
+    	if (enemies.body.velocity.y <= speed * -1)
     	{
     		enemies.body.velocity.y = speed * -1;
-    	}
-    	if (enemies.body.velocity.x > 50)
-    	{
-    		enemies.body.velocity.x = 50	
     	}
     }
 
@@ -190,9 +259,9 @@ window.onload = function() {
     {
     	introText.visible = false;
     	playing = true;
-    	greenOpponent.body.velocity.y = speed * -1;
-    	redOpponent.body.velocity.y = speed * -1;
-    	blueOpponent.body.velocity.y = speed * -1;
+    	greenOpponent.body.velocity.y = 1 * -1;
+    	redOpponent.body.velocity.y = 1 * -1;
+    	blueOpponent.body.velocity.y = 1 * -1;
     }
     
     function gameover()
