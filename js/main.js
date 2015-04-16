@@ -27,7 +27,7 @@ window.onload = function() {
     var cursors;
     
     var playing = false;
-    var speed = 20;
+    var speed = 50;
     
     var enemies;
     var greenOpponent;
@@ -185,15 +185,15 @@ window.onload = function() {
     
     function boost()
     {
-    	speed = speed + 30;
-    	player.body.velocity.y -= 30;
+    	speed = speed + 25;
+    	player.body.velocity.y -= 25;
     	timecheck = game.time.now;
     	spedup = true;
     }
     
     function unboost()
     {
-    	speed = 40;
+    	speed = 50;
     	spedup = false;
     }
 
@@ -222,12 +222,12 @@ window.onload = function() {
     
     function slowed()
     {
-    	speed = 5;
+    	speed = 25;
     }
     
     function speedup()
     {
-    	speed = 20;
+    	speed = 50;
     }
     
     function enemyslow(enemies)
