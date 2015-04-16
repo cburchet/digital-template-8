@@ -14,6 +14,7 @@ window.onload = function() {
         game.load.tilemap('road', 'assets/roadrace.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image( 'gameTiles', 'assets/tiles.png' );
         game.load.image('lightning', 'assets/lightning.png');
+        game.load.image('bullet', 'assets/bullet.png');
     }
     
     //maps for 
@@ -25,6 +26,10 @@ window.onload = function() {
     var player;
     var playerEngine;
     var cursors;
+    
+    var bullet;
+    var fireRate = 100;
+    var nextFire = 0;
     
     var playing = false;
     var speed = 120;
@@ -140,6 +145,10 @@ window.onload = function() {
     		{
     			player.body.velocity.y += 10;
     		}
+    		if (isDown(Phaser.Keyboard.SPACEBAR))
+    		{
+    			fire();
+    		}
     		if (player.body.velocity.x == speed)
     		{
     			player.body.velocity.x = speed;	
@@ -157,6 +166,23 @@ window.onload = function() {
     			player.body.velocity.y = speed * -1;	
     		}
     	}
+    }
+    
+    function fire()
+    {
+    	if (game.time.now > nextFire)
+    	{
+    		nextFire = game.time.now + fireRate;
+	    	bullet = game.add.sprite(player.x, player.y - 20, 'bullet');
+	    	bullet.lifespan = 1000;
+	    	game.physics.enable(bullet);
+	    	bullet.rotation = game.physics.arcade.moveToPointer(bullet, 1000, game.input.activePointer);
+    	}
+    }
+    
+    function bulletHitEnemy (cars, bullet) 
+    {
+	cars.kill();
     }
     
     function destroyCar(player, cars)
