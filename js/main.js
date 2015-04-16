@@ -261,13 +261,11 @@ window.onload = function() {
     	blueOpponent.body.velocity.y = speed * -1;
     }
     
-    function restart()
+    function restart(player, greenOpponent, redOpponent, blueOpponent)
     {
     	player.x = 400;
     	player.y = game.world.height -160;
     	
-    	enemies = game.add.group();
-    	enemies.enableBody = true
     	greenOpponent.x = 200;
     	greenOpponent.y = game.world.height -160;
     	redOpponent.x = 300;
