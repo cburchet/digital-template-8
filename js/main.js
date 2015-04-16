@@ -127,10 +127,12 @@ window.onload = function() {
     		if (cursors.left.isDown)
     		{
 			player.body.velocity.x -= 10;
+			enemies.body.velocity.x = -10;
     		}
     		else if (cursors.right.isDown)
     		{
     			player.body.velocity.x += 10;
+    			enemies.body.velocity.x = 10;
     		}
     		if (cursors.up.isDown)
     		{
