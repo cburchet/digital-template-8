@@ -27,7 +27,7 @@ window.onload = function() {
     var cursors;
     
     var playing = false;
-    var speed = 50;
+    var speed = 75;
     
     var enemies;
     var greenOpponent;
@@ -193,7 +193,7 @@ window.onload = function() {
     
     function unboost()
     {
-    	speed = 50;
+    	speed = 75;
     	spedup = false;
     }
 
