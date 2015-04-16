@@ -150,11 +150,11 @@ window.onload = function() {
     		{
     			player.body.velocity.x = speed * -1;	
     		}
-    		if (player.body.velocity.y == speed)
+    		if (player.body.velocity.y > speed)
     		{
     			player.body.velocity.y = speed;	
     		}
-    		else if (player.body.velocity.y == speed * -1)
+    		else if (player.body.velocity.y < speed * -1)
     		{
     			player.body.velocity.y = speed * -1;	
     		}
