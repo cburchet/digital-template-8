@@ -203,34 +203,34 @@ window.onload = function() {
     	
     	if (game.time.now > enemyFire)
     	{
-    		var fireChance = game.rnd.integerInRange(0,15);
+    		//var fireChance = game.rnd.integerInRange(0,15);
     		if (fireChance == 0)
     		{
-	    	//	var colorFire = game.rnd.integerInRange(0,3);
-	    	//	if (colorFire == 0)
-	    	//	{
-		  //  		enemyFire = game.time.now + fireRate;
-		//	    	bullet = game.add.sprite(redOpponent.x, redOpponent.y - 20, 'bullet');
-		//	    	bullet.lifespan = 1000;
-		//	    	game.physics.enable(bullet);
-		//	    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
-	    	//	}
-	    	//	else if (colorFire == 1)
-	    	//	{
-		  //  		enemyFire = game.time.now + fireRate;
-		//	    	bullet = game.add.sprite(greenOpponent.x, greenOpponent.y - 20, 'bullet');
-		//	    	bullet.lifespan = 1000;
-		//	    	game.physics.enable(bullet);
-		//	    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
-	    	//	}
-	    	//	else if (colorFire == 2)
-	    	//	{
-		 //   		enemyFire = game.time.now + fireRate;
-		//	    	bullet = game.add.sprite(blueOpponent.x, blueOpponent.y - 20, 'bullet');
-		//	    	bullet.lifespan = 1000;
-		//	    	game.physics.enable(bullet);
-		//	    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
-	    	//	}
+	    		var colorFire = game.rnd.integerInRange(0,3);
+	    		if (colorFire == 0)
+	    		{
+		    		enemyFire = game.time.now + fireRate;
+			    	bullet = game.add.sprite(redOpponent.x, redOpponent.y - 20, 'bullet');
+			    	bullet.lifespan = 1000;
+			    	game.physics.enable(bullet);
+			    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
+	    		}
+	    		else if (colorFire == 1)
+	    		{
+		    		enemyFire = game.time.now + fireRate;
+			    	bullet = game.add.sprite(greenOpponent.x, greenOpponent.y - 20, 'bullet');
+			    	bullet.lifespan = 1000;
+			    	game.physics.enable(bullet);
+			    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
+	    		}
+	    		else if (colorFire == 2)
+	    		{
+		    		enemyFire = game.time.now + fireRate;
+			    	bullet = game.add.sprite(blueOpponent.x, blueOpponent.y - 20, 'bullet');
+			    	bullet.lifespan = 1000;
+			    	game.physics.enable(bullet);
+			    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
+	    		}
     		}
     	}
     }
