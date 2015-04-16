@@ -94,11 +94,11 @@ window.onload = function() {
     	
     	//player and opponents overlap with offroad slows, road speeds up, finishline ends game
     	game.physics.arcade.overlap(player, offroad, slowed, null, this);
-    //	game.physics.arcade.overlap(player, road, speedup, null, this);
+    	game.physics.arcade.overlap(player, road, speedup, null, this);
     	game.physics.arcade.overlap(player, finishLine, gameover, null, this);
     	
     	game.physics.arcade.overlap(enemies, offroad, enemyslow, null, this);
-    //	game.physics.arcade.overlap(enemies, road, enemyspeed, null, this);
+    	game.physics.arcade.overlap(enemies, road, enemyspeed, null, this);
     	game.physics.arcade.overlap(enemies, finishLine, gameover, null, this);
     	if (playing == true)
     	{
@@ -154,11 +154,11 @@ window.onload = function() {
     
     function enemyslow(enemies)
     {
-    	enemies.body.velocity.y -= 10;
+    	enemies.body.velocity.y += 10;
     	enemies.body.velocity.x -= 5;
-    	if (enemies.body.velocity.y < 50)
+    	if (enemies.body.velocity.y > -50)
     	{
-    		enemies.body.velocity.y = 50;
+    		enemies.body.velocity.y = -50;
     	}
     	if (enemies.body.velocity.x < 0)
     	{
@@ -173,10 +173,10 @@ window.onload = function() {
     
     function enemyspeed(enemies)
     {
-    	enemies.body.velocity.y += 10;
-    	if (enemies.body.velocity.y > speed)
+    	enemies.body.velocity.y -= 10;
+    	if (enemies.body.velocity.y < speed * -1)
     	{
-    		enemies.body.velocity.y = speed;
+    		enemies.body.velocity.y = speed * -1;
     	}
     	if (enemies.body.velocity.x > 50)
     	{
@@ -190,9 +190,9 @@ window.onload = function() {
     {
     	introText.visible = false;
     	playing = true;
-    	greenOpponent.body.velocity.y = speed;
-    	redOpponent.body.velocity.y = speed;
-    	blueOpponent.body.velocity.y = speed;
+    	greenOpponent.body.velocity.y = speed * -1;
+    	redOpponent.body.velocity.y = speed * -1;
+    	blueOpponent.body.velocity.y = speed * -1;
     }
     
     function gameover()
