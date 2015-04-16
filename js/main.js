@@ -106,7 +106,7 @@ window.onload = function() {
     //	game.physics.arcade.overlap(player, offroad, slowed, null, this);
 -   // 	game.physics.arcade.overlap(player, road, speedup, null, this);
      	
--    	game.physics.arcade.overlap(enemies, offroad, enemyslow, null, this);
+-    //	game.physics.arcade.overlap(enemies, offroad, enemyslow, null, this);
 -    	game.physics.arcade.overlap(enemies, road, enemyspeed, null, this);
     	game.physics.arcade.overlap(player, finishLine, gameover, null, this);
     	
@@ -234,18 +234,18 @@ window.onload = function() {
     	{
     		enemies.body.velocity.y = speed;
     	}
-    	enemies.body.velocity.x = enemies.body.velocity.x * -1;
+    	enemySideways(enemies);
     }
     
     function enemySideways(enemies)
     {
-    	if (enemies.x < 0)
+    	if (enemies.x < 500)
     	{
-    		enemies.body.velocity.x = enemies.body.velocity.x * -1;
+    		enemies.body.velocity.x = 10;
     	}
-    	else if (enemies.x > game.world.width)
+    	else if (enemies.x > 500)
     	{
-    		enemies.body.velocity.x = enemies.body.velocity.x * -1;
+    		enemies.body.velocity.x = -10;
     	}
     }
     
