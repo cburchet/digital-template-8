@@ -95,19 +95,19 @@ window.onload = function() {
     function update() 
     {
     	//player and opponents hit badCars
-    	//game.physics.arcade.collide(player, cars, destroyCar, null, this);
-    	//game.physics.arcade.collide(enemies, cars, enemydestroycar, null, this);
+    	game.physics.arcade.collide(player, cars, destroyCar, null, this);
+    	game.physics.arcade.collide(enemies, cars, enemydestroycar, null, this);
     	
     	//player and opponents collide
-    	game.physics.arcade.collide(player, enemies);
-    	game.physics.arcade.collide(enemies, enemies);
+    	//game.physics.arcade.collide(player, enemies);
+    	//game.physics.arcade.collide(enemies, enemies);
     	
     	//player and opponents overlap with offroad slows, road speeds up, finishline ends game
     //	game.physics.arcade.overlap(player, offroad, slowed, null, this);
 -   // 	game.physics.arcade.overlap(player, road, speedup, null, this);
      	
 -    //	game.physics.arcade.overlap(enemies, offroad, enemyslow, null, this);
--    	game.physics.arcade.overlap(enemies, road, enemyspeed, null, this);
+-    	//game.physics.arcade.overlap(enemies, road, enemyspeed, null, this);
     	game.physics.arcade.overlap(player, finishLine, gameover, null, this);
     	
     	game.physics.arcade.overlap(enemies, finishLine, gameover, null, this);
