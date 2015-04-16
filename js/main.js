@@ -145,7 +145,7 @@ window.onload = function() {
     		{
     			player.body.velocity.y += 10;
     		}
-    		if (isDown(Phaser.Keyboard.SPACEBAR))
+    		if (Phaser.Keyboard.SPACEBAR.isDown
     		{
     			fire();
     		}
