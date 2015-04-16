@@ -28,6 +28,7 @@ window.onload = function() {
     var cursors;
     
     var bullet;
+    var enemyBullet;
     var fireRate = 100;
     var nextFire = 0;
     var enemyNextFire = 0;
@@ -105,7 +106,7 @@ window.onload = function() {
     	game.physics.arcade.collide(player, cars, destroyCar, null, this);
     	game.physics.arcade.overlap(enemies, cars, enemydestroycar, null, this);
     	
-    	game.physics.arcade.collide(player, bullet, bulletHitPlayer, null, this);
+    	game.physics.arcade.collide(player, enemyBullet, bulletHitPlayer, null, this);
     	game.physics.arcade.collide(redOpponent, bullet, bulletHitRed, null, this);
     	game.physics.arcade.collide(blueOpponent, bullet, bulletHitBlue, null, this);
     	game.physics.arcade.collide(greenOpponent, bullet, bulletHitGreen, null, this);
@@ -212,45 +213,45 @@ window.onload = function() {
 		    		enemyNextFire = game.time.now + fireRate;
 			    	if (player.x > redOpponent.x)
 		    		{
-			    		bullet = game.add.sprite(redOpponent.x + 45, redOpponent.y, 'bullet');
+			    		enemyBullet = game.add.sprite(redOpponent.x + 45, redOpponent.y, 'bullet');
 		    		}
 		    		else if (player.x < redOpponent.x)
 		    		{
-		    			bullet = game.add.sprite(redOpponent.x - 45, redOpponent.y, 'bullet');
+		    			enemyBullet = game.add.sprite(redOpponent.x - 45, redOpponent.y, 'bullet');
 		    		};
-			    	bullet.lifespan = 1000;
-			    	game.physics.enable(bullet);
-			    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
+			    	enemyBullet.lifespan = 1000;
+			    	game.physics.enable(enemyBullet);
+			    	enemyBullet.rotation = game.physics.arcade.moveToXY(enemyBullet, player.x, player.y, 1000);
 	    		}
 	    		else if (colorFire == 1)
 	    		{
 		    		enemyNextFire = game.time.now + fireRate;
 		    		if (player.x > greenOpponent.x)
 		    		{
-			    		bullet = game.add.sprite(greenOpponent.x + 45, greenOpponent.y, 'bullet');
+			    		enemyBullet = game.add.sprite(greenOpponent.x + 45, greenOpponent.y, 'bullet');
 		    		}
 		    		else if (player.x < blueOpponent.x)
 		    		{
-		    			bullet = game.add.sprite(greenOpponent.x - 45, greenOpponent.y, 'bullet');
+		    			enemyBullet = game.add.sprite(greenOpponent.x - 45, greenOpponent.y, 'bullet');
 		    		}
-			    	bullet.lifespan = 1000;
-			    	game.physics.enable(bullet);
-			    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
+			    	enemyBullet.lifespan = 1000;
+			    	game.physics.enable(enemyBullet);
+			    	enemyBullet.rotation = game.physics.arcade.moveToXY(enemyBullet, player.x, player.y, 1000);
 	    		}
 	    		else if (colorFire == 2)
 	    		{
 		    		enemyNextFire = game.time.now + fireRate;
 		    		if (player.x > blueOpponent.x)
 		    		{
-			    		bullet = game.add.sprite(blueOpponent.x + 45, blueOpponent.y, 'bullet');
+			    		enemyBullet = game.add.sprite(blueOpponent.x + 45, blueOpponent.y, 'bullet');
 		    		}
 		    		else if (player.x < blueOpponent.x)
 		    		{
-		    			bullet = game.add.sprite(blueOpponent.x - 45, blueOpponent.y, 'bullet');
+		    			enemyBullet = game.add.sprite(blueOpponent.x - 45, blueOpponent.y, 'bullet');
 		    		}
-			    	bullet.lifespan = 1000;
-			    	game.physics.enable(bullet);
-			    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
+			    	enemyBullet.lifespan = 1000;
+			    	game.physics.enable(enemyBullet);
+			    	enemyBullet.rotation = game.physics.arcade.moveToXY(enemyBullet, player.x, player.y, 1000);
 	    		}
     		}
     	}
@@ -283,9 +284,9 @@ window.onload = function() {
 	greenOpponent.body.velocity.x = 0;
     }
     
-    function bulletHitPlayer (player, bullet) 
+    function bulletHitPlayer (player, enemyBullet) 
     {
-	bullet.destroy();
+	enemyBullet.destroy();
 	player.body.velocity.y += 25;
     }
     
