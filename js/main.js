@@ -190,6 +190,7 @@ window.onload = function() {
     {
     	introText.visible = false;
     	playing = true;
+    	enemies.body.velocity.y = 10;
     }
     
     function gameover()
