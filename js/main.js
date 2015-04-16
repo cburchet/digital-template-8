@@ -96,7 +96,7 @@ window.onload = function() {
     {
     	//player and opponents hit badCars
     	game.physics.arcade.collide(player, cars, destroyCar, null, this);
-    	game.physics.arcade.collide(enemies, cars, enemydestroycar, null, this);
+    	game.physics.arcade.overlap(enemies, cars, enemydestroycar, null, this);
     	
     	
     	//player and opponents overlap with offroad slows, road speeds up, finishline ends game
