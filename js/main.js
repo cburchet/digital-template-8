@@ -104,7 +104,9 @@ window.onload = function() {
     	game.physics.arcade.overlap(enemies, cars, enemydestroycar, null, this);
     	
     	game.physics.arcade.collide(player, bullet, bulletHitPlayer, null, this);
-    	game.physics.arcade.collide(enemies, bullet, bulletHitEnemy, null, this);
+    	game.physics.arcade.collide(redOpponent, bullet, bulletHitRed, null, this);
+    	game.physics.arcade.collide(blueOpponent, bullet, bulletHitBlue, null, this);
+    	game.physics.arcade.collide(greenOpponent, bullet, bulletHitGren, null, this);
     	game.physics.arcade.collide(cars, bullet, bulletHitCar, null, this);
     	
     	//player and opponents overlap with offroad slows, road speeds up, finishline ends game
@@ -200,10 +202,22 @@ window.onload = function() {
 	cars.kill();
     }
     
-    function bulletHitEnemy (enemies, bullet) 
+    function bulletHitRed (redOpponent, bullet) 
     {
 	bullet.destroy();
-	enemies.body.velocity.y += 25;
+	redOpponent.body.velocity.y += 25;
+    }
+    
+    function bulletHitBlue (blueOpponent, bullet) 
+    {
+	bullet.destroy();
+	blueOpponent.body.velocity.y += 25;
+    }
+    
+    function bulletHitGreen (greenOpponent, bullet) 
+    {
+	bullet.destroy();
+	greenOpponent.body.velocity.y += 25;
     }
     
     function bulletHitPlayer (player, bullet) 
