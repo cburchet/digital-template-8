@@ -27,7 +27,7 @@ window.onload = function() {
     var cursors;
     
     var playing = false;
-    var speed = 70;
+    var speed = 40;
     
     var enemies;
     var greenOpponent;
@@ -193,7 +193,7 @@ window.onload = function() {
     
     function unboost()
     {
-    	speed -= 30;
+    	speed = 40;
     	spedup = false;
     }
 
@@ -222,12 +222,12 @@ window.onload = function() {
     
     function slowed()
     {
-    	speed = 35;
+    	speed = 25;
     }
     
     function speedup()
     {
-    	speed = 70;
+    	speed = 40;
     }
     
     function enemyslow(enemies)
@@ -259,9 +259,9 @@ window.onload = function() {
     {
     	introText.visible = false;
     	playing = true;
-    	greenOpponent.body.velocity.y = 1 * -1;
-    	redOpponent.body.velocity.y = 1 * -1;
-    	blueOpponent.body.velocity.y = 1 * -1;
+    	greenOpponent.body.velocity.y = 5 * -1;
+    	redOpponent.body.velocity.y = 5 * -1;
+    	blueOpponent.body.velocity.y = 5 * -1;
     }
     
     function gameover()
