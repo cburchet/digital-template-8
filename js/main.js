@@ -130,7 +130,7 @@ window.onload = function() {
     		{
 			player.body.velocity.x -= 10;
     		}
-    		else if (currsors.right.isDown)
+    		else if (cursors.right.isDown)
     		{
     			player.body.velocity.x += 10;
     		}
