@@ -27,7 +27,7 @@ window.onload = function() {
     var cursors;
     
     var playing = false;
-    var speed = 40;
+    var speed = 20;
     
     var enemies;
     var greenOpponent;
@@ -164,13 +164,13 @@ window.onload = function() {
     function destroyCar(player, cars)
     {
     	cars.kill();
-    	speed = 35;
+    	player.body.velocity.y += 10;
     }
     
     function enemydestroycar(enemies, cars)
     {
     	cars.kill();
-    	enemies.body.velocity.y = -50;
+    	enemies.body.velocity.y += 10;
     }
     
     function createLightning()
@@ -222,20 +222,20 @@ window.onload = function() {
     
     function slowed()
     {
-    	speed = 25;
+    	speed = 5;
     }
     
     function speedup()
     {
-    	speed = 40;
+    	speed = 20;
     }
     
     function enemyslow(enemies)
     {
     	enemies.body.velocity.y += 10;
-    	if (enemies.body.velocity.y >= 50)
+    	if (enemies.body.velocity.y >= speed)
     	{
-    		enemies.body.velocity.y = 50;
+    		enemies.body.velocity.y = speed;
     	}
     }
     
@@ -259,9 +259,9 @@ window.onload = function() {
     {
     	introText.visible = false;
     	playing = true;
-    	greenOpponent.body.velocity.y = 5 * -1;
-    	redOpponent.body.velocity.y = 5 * -1;
-    	blueOpponent.body.velocity.y = 5 * -1;
+    	greenOpponent.body.velocity.y = speed * -1;
+    	redOpponent.body.velocity.y = speed * -1;
+    	blueOpponent.body.velocity.y = speed * -1;
     }
     
     function gameover()
