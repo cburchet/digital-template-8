@@ -127,6 +127,10 @@ window.onload = function() {
     	
     	if (playing == true)
     	{
+    		if (enemies.x > 350 && enemies.x < 400)
+    		{
+    			enemies.velocity.x = 0;
+    		}
     		//enemyspeed(enemies);
     		if (cursors.left.isDown)
     		{
@@ -230,11 +234,19 @@ window.onload = function() {
     	{
     		enemies.body.velocity.y = speed;
     	}
+    	enemies.body.velocity.x = enemies.body.velocity.x * -1;
     }
     
     function enemySideways(enemies)
     {
-    	//input sideways movement 
+    	if (enemies.x < 0)
+    	{
+    		enemies.body.velocity.x = enemies.body.velocity.x * -1;
+    	}
+    	else if (enemies.x > game.world.width)
+    	{
+    		enemies.body.velocity.x = enemies.body.velocity.x * -1;
+    	}
     }
     
     function enemyspeed(enemies)
