@@ -257,6 +257,26 @@ window.onload = function() {
     	blueOpponent.body.velocity.y = speed * -1;
     }
     
+    function restart()
+    {
+    	player.x = 400;
+    	player.y = game.world.height -160;
+    	
+    	enemies = game.add.group();
+    	enemies.enableBody = true
+    	greenOpponent.x = 200;
+    	greenOpponent.y = game.world.height -160;
+    	redOpponent.x = 300;
+    	redOpponent.y = game.world.height -160;
+    	blueOpponent.x = 500;
+    	blueOpponent.y = game.world.height -160;
+    	player = false;
+    	player.body.velocity = 0;
+	enemies.body.velocity = 0;
+	introText.visible = true;
+	game.input.onDown.add(startPlay, this);
+    }
+    
     function gameover()
     { 
     	playing = false;
