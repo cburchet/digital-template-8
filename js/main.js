@@ -91,7 +91,7 @@ window.onload = function() {
         game.physics.arcade.enable(lightning);
     	game.time.events.loop(Phaser.Timer.SECOND * 2, createCar, this);
     	game.time.events.loop(Phaser.Timer.SECOND * 3, createLightning, this);
-    	game.time.events.loop(Phaser.Timer.SECOND * 3, enemyFire, this);
+    	game.time.events.loop(Phaser.Timer.SECOND * 2, enemyFire, this);
     	
     	introText = game.add.text(game.world.centerX, 400, '- click to start racing -', { font: "40px Arial", fill: "#ffffff", align: "center" });
 
@@ -203,8 +203,8 @@ window.onload = function() {
     	
     	if (game.time.now > enemyNextFire)
     	{
-    		var fireChance = game.rnd.integerInRange(0,15);
-    		if (fireChance == 0)
+    		var fireChance = game.rnd.integerInRange(0,5);
+    		if (fireChance == 1)
     		{
 	    		var colorFire = game.rnd.integerInRange(0,3);
 	    		if (colorFire == 0)
@@ -392,7 +392,9 @@ window.onload = function() {
     { 
     	playing = false;
 	player.body.velocity = 0;
-	enemies.body.velocity = 0;
+	redOpponent.body.velocity = 0;
+	greenOpponent.body.velocity = 0;
+	blueOpponent.body.velocity = 0;
 	var gameoverText = game.add.text(350, 300, 'Game Over', { fontSize: '128px', fill: 'red' });
 	gameoverText.fixedToCamera = true;
     }
