@@ -130,17 +130,17 @@ window.onload = function() {
     		redOpponent.body.velocity.y -= 5;
     		blueOpponent.body.velocity.y -= 5;
     		greenOpponent.body.velocity.y -= 5;
-    		if (redOpponent.body.velocity.y <= speed)
+    		if (redOpponent.body.velocity.y <= speed * -1)
     		{
-    			redOpponent.body.velocity.y = speed;	
+    			redOpponent.body.velocity.y = speed * -1;	
     		}
-    		if (blueOpponent.body.velocity.y <= speed)
+    		if (blueOpponent.body.velocity.y <= speed* -1)
     		{
-    			blueOpponent.body.velocity.y = speed;	
+    			blueOpponent.body.velocity.y = speed* -1;	
     		}
-    		if (greenOpponent.body.velocity.y <= speed)
+    		if (greenOpponent.body.velocity.y <= speed* -1)
     		{
-    			greenOpponent.body.velocity.y = speed;	
+    			greenOpponent.body.velocity.y = speed* -1;	
     		}
     		//enemyspeed(enemies);
     		if (cursors.left.isDown)
