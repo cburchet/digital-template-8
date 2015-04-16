@@ -206,18 +206,21 @@ window.onload = function() {
     {
 	bullet.destroy();
 	redOpponent.body.velocity.y += 25;
+	redOpponent.body.velocity.x = 0;
     }
     
     function bulletHitBlue (blueOpponent, bullet) 
     {
 	bullet.destroy();
 	blueOpponent.body.velocity.y += 25;
+	blueOpponent.body.velocity.x = 0;
     }
     
     function bulletHitGreen (greenOpponent, bullet) 
     {
 	bullet.destroy();
 	greenOpponent.body.velocity.y += 25;
+	greenOpponent.body.velocity.x = 0;
     }
     
     function bulletHitPlayer (player, bullet) 
