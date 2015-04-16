@@ -30,7 +30,7 @@ window.onload = function() {
     var bullet;
     var fireRate = 100;
     var nextFire = 0;
-    var enemyFire;
+    var enemyFire = 0;
     
     var playing = false;
     var speed = 120;
