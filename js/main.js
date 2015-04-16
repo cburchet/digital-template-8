@@ -30,6 +30,7 @@ window.onload = function() {
     var bullet;
     var fireRate = 100;
     var nextFire = 0;
+    var enemyFire;
     
     var playing = false;
     var speed = 120;
@@ -90,6 +91,7 @@ window.onload = function() {
         game.physics.arcade.enable(lightning);
     	game.time.events.loop(Phaser.Timer.SECOND * 2, createCar, this);
     	game.time.events.loop(Phaser.Timer.SECOND * 3, createLightning, this);
+    	game.time.events.loop(Phaser.Timer.SECOND * 3, enemyFire, this);
     	
     	introText = game.add.text(game.world.centerX, 400, '- click to start racing -', { font: "40px Arial", fill: "#ffffff", align: "center" });
 
@@ -193,6 +195,43 @@ window.onload = function() {
 	    	bullet.lifespan = 1000;
 	    	game.physics.enable(bullet);
 	    	bullet.rotation = game.physics.arcade.moveToPointer(bullet, 1000, game.input.activePointer);
+    	}
+    }
+    
+    function enemyFire()
+    {
+    	
+    	if (game.time.now > enemyFire)
+    	{
+    		var fireChance = game.rnd.integerInRange(0,15);
+    		if (fireChance == 0)
+    		{
+	    		var colorFire = game.rnd.integerInRange(0,3);
+	    		if (colorFire == 0)
+	    		{
+		    		enemyFire = game.time.now + fireRate;
+			    	bullet = game.add.sprite(redOpponent.x, redOpponent.y - 20, 'bullet');
+			    	bullet.lifespan = 1000;
+			    	game.physics.enable(bullet);
+			    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
+	    		}
+	    		else if (colorFire == 1)
+	    		{
+		    		enemyFire = game.time.now + fireRate;
+			    	bullet = game.add.sprite(greenOpponent.x, greenOpponent.y - 20, 'bullet');
+			    	bullet.lifespan = 1000;
+			    	game.physics.enable(bullet);
+			    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
+	    		}
+	    		else if (colorFire == 2)
+	    		{
+		    		enemyFire = game.time.now + fireRate;
+			    	bullet = game.add.sprite(blueOpponent.x, blueOpponent.y - 20, 'bullet');
+			    	bullet.lifespan = 1000;
+			    	game.physics.enable(bullet);
+			    	bullet.rotation = game.physics.arcade.moveToXY(bullet, player.x, player.y, 1000);
+	    		}
+    		}
     	}
     }
     
